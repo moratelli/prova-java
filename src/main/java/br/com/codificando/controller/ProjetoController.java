@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.com.codificando.model.Projeto;
-import br.com.codificando.respository.FuncionarioRespository;
+import br.com.codificando.respository.FuncionarioRepository;
 import br.com.codificando.respository.ProjetoRepository;
 
 @Controller
@@ -19,7 +19,7 @@ public class ProjetoController {
 	ProjetoRepository projetoRepository;
 	
 	@Autowired
-	FuncionarioRespository funcionarioRespository;
+	FuncionarioRepository funcionarioRepository;
 	
 	@GetMapping("/projeto/list")
 	public String listProjeto(Model model) {
@@ -32,8 +32,8 @@ public class ProjetoController {
 	public String addProjeto(Model model) {
 		
 		model.addAttribute("projeto", new Projeto());
-		model.addAttribute("gerentes", funcionarioRespository.findAllByCargo("Gerente"));
-		model.addAttribute("funcionarios", funcionarioRespository.findByCargoNot("Gerente"));
+		model.addAttribute("gerentes", funcionarioRepository.findAllByCargo("Gerente"));
+		model.addAttribute("funcionarios", funcionarioRepository.findByCargoNot("Gerente"));
 		return "projeto/add";
 		
 	}
@@ -59,8 +59,8 @@ public class ProjetoController {
 	@GetMapping("/projeto/edit/{id}")
 	public String editProjeto(@PathVariable long id, Model model) {
 		model.addAttribute("projeto", projetoRepository.findById(id));
-		model.addAttribute("gerentes", funcionarioRespository.findAllByCargo("Gerente"));
-		model.addAttribute("funcionarios", funcionarioRespository.findByCargoNot("Gerente"));
+		model.addAttribute("gerentes", funcionarioRepository.findAllByCargo("Gerente"));
+		model.addAttribute("funcionarios", funcionarioRepository.findByCargoNot("Gerente"));
 		return "projeto/edit";
 	}
 	

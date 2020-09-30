@@ -23,20 +23,20 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link active" th:href="@{/}">Principal</a>
-				<a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
-				<a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
-                <a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
-            </div>
+                <a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
+                <a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
+				<a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
+			</div>
 		</div>
     </nav>
 
     <div class="container-base">
-        <div class="container container-funcionario">
+        <div class="container container-usuario">
             <div class="form-titulo">
-                <h4>Funcionário</h4>
+                <h4>Usuário</h4>
             </div>
 
-            <form th:action="@{/funcionario/save}" th:object="${funcionario}" 
+            <form th:action="@{/usuario/save}" th:object="${usuario}" 
                 method="POST">
                 <div class="form-group">
                     <label>Código</label>
@@ -50,15 +50,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Cargo</label>
-                    <select class="form-control" th:field="*{cargo}" required>
-                        <option value="Contador">Contador</option>
-                        <option value="Engenheiro">Engenheiro</option>
-                        <option value="Financeiro">Financeiro</option>
-                        <option value="Gerente">Gerente</option>
-                        <option value="TI">TI</option>
-                    </select>
+                    <label>Login</label>
+                    <input class="form-control" type="text" th:field="*{login}" required>
+                </div>
 
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input class="form-control" type="password" th:field="*{senha}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>CPF</label>
+                    <input class="form-control" type="number" th:field="*{cpf}" required>
                 </div>
 
                 <div class="form-group">

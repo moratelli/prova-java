@@ -23,51 +23,49 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link active" th:href="@{/}">Principal</a>
-				<a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
-				<a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
-                <a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
-            </div>
+                <a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
+                <a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
+				<a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
+			</div>
 		</div>
     </nav>
 
     <div class="container-base">
-        <div class="container container-funcionario">
+        <div class="container container-usuario">
             <div class="form-titulo">
                 <h4>Funcionário</h4>
             </div>
 
-            <form th:action="@{/funcionario/save}" th:object="${funcionario}" 
-                method="POST">
+            <div th:if="${salvo}" class="alert alert-success">
+                Funcionário salvo com sucesso!
+            </div>
+
+            <form th:object="${usuario}">
                 <div class="form-group">
                     <label>Código</label>
                     <input class="form-control" type="number" 
-                        th:field="*{id}" readonly>
+                        th:field="${usuario.id}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Nome</label>
-                    <input class="form-control" type="text" th:field="*{nome}" required>
+                    <input class="form-control" type="text" th:field="${usuario.nome}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>Cargo</label>
-                    <select class="form-control" th:field="*{cargo}" required>
-                        <option value="Contador">Contador</option>
-                        <option value="Engenheiro">Engenheiro</option>
-                        <option value="Financeiro">Financeiro</option>
-                        <option value="Gerente">Gerente</option>
-                        <option value="TI">TI</option>
-                    </select>
-
+                    <label>Login</label>
+                    <input class="form-control" type="text" th:field="${usuario.login}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-secondary btn-width" type="button"
-                        onclick="window.location.href='./list'">
-                        <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
-                    </button>
-                    <button class="btn btn-success btn-width" type="submit">
-                        <i class="fa fa-save" aria-hidden="true"></i> Salvar
+                    <label>CPF</label>
+                    <input class="form-control" type="text" th:field="${usuario.cpf}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-secondary btn-voltar-width" type="button"
+                        onclick="window.location.href='../../list'">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
                     </button>
                 </div>
             </form>

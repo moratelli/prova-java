@@ -23,20 +23,20 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="nav-item nav-link active" th:href="@{/}">Principal</a>
-				<a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
-				<a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
-                <a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
-            </div>
+                <a class="nav-item nav-link" th:href="@{/projeto/list}">Projetos</a>
+                <a class="nav-item nav-link" th:href="@{/funcionario/list}">Funcionários</a>
+				<a class="nav-item nav-link" th:href="@{/usuario/list}">Usuários</a>
+			</div>
 		</div>
     </nav>
 
-    <div class="container container-projetos">
+    <div class="container container-usuarios">
         <div class="form-titulo">
-            <h4>Projetos</h4>
+            <h4>Usuários</h4>
         </div>
 
         <div class="form-novo">
-            <a th:href="@{/projeto/add}"
+            <a th:href="@{/usuario/add}"
                 class="badge badge-pill badge-success badge-botao"> 
                 <i class="fa fa-plus-circle"></i> Novo
             </a>
@@ -46,39 +46,32 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Data Início</th>
+                        <th>Cód.</th>
                         <th>Nome</th>
-                        <th>Status</th>
-                        <th>Risco</th>
-                        <th>Orçamento</th>
-                        <th>Data Previsão</th>
-                        <th>Data Final</th>
-                        <th colspan="4">Gerente</th>
+                        <th>Login</th>
+                        <th>CPF</th>
+                        <th colspan="4"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="projeto : ${projetos}">
-                        <td th:text="${#dates.format(projeto.dataInicio, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${projeto.nome}"></td>
-                        <td th:text="${projeto.status}"></td>
-                        <td th:text="${projeto.risco}"></td>
-                        <td th:text="${'R$ '+ #numbers.formatDecimal(projeto.orcamento, 1, 'DEFAULT', 2,'DEFAULT')}"></td>
-                        <td th:text="${#dates.format(projeto.dataPrevisao, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${#dates.format(projeto.dataFinal, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${projeto.gerente.nome}"></td>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.nome}"></td>
+                        <td th:text="${usuario.login}"></td>
+                        <td th:text="${usuario.cpf}"></td>
                         <td class="tabela-controle">
-                            <a th:href="@{'/projeto/view/' + ${projeto.id} + '/' + ${false}}">
+                            <a th:href="@{'/usuario/view/' + ${usuario.id} + '/' + ${false}}">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </td>
                         <td class="tabela-controle">
-                            <a th:href="@{'/projeto/edit/' + ${projeto.id}}">
+                            <a th:href="@{'/usuario/edit/' + ${usuario.id}}">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                             </a>
                         </td>
                         <td class="tabela-controle-delete">
                             <button type="button" class="btn btn-outline-danger"
-                            	th:onclick="|showModalDeletar(${projeto.id})|">
+                            	th:onclick="|showModalDeletar(${usuario.id})|">
                             	<i class="fa fa-trash"></i>
                             </button>
                         </td>
@@ -102,7 +95,7 @@
 	        
 	      </div>
 	      <div class="modal-body">
-	        <p>Você deseja realmente deletar o Projeto?</p>
+	        <p>Você deseja realmente deletar o Usuário?</p>
 	      </div>
 	      <div class="modal-footer">
 	      	<input type="number" id="id_deletar" hidden>
@@ -110,7 +103,7 @@
 	        	<i class="fa fa-ban"></i> Cancelar
 			</button>
 	        <button type="button" class="btn btn-danger"
-	        	th:onclick="deletar('projeto')">
+	        	th:onclick="deletar('usuario')">
 	        	<i class="fa fa-trash"></i> Deletar
 	        </button>
 	      </div>
@@ -130,7 +123,6 @@
 	<!--JAVASCRIPT-->
 	<script th:src="@{/js/jquery-3.5.1.min.js}"></script>
 	<script th:src="@{/bootstrap-4.5.2/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/script.js}"></script>
-    
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
